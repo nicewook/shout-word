@@ -44,6 +44,7 @@ var hints = document.querySelector(".hints");
 var result = document.querySelector(".result");
 var right = document.querySelector(".right");
 var wrong = document.querySelector(".wrong");
+var manual = document.querySelector(".manual");
 
 let state = "ready";
 let count = 0;
@@ -54,9 +55,16 @@ var wordHTML = "";
 function start() {
   setTimeout(function () {
     recognition.start();
+
     currentWord = "시작";
-    wordHTML = currentWord;
-    hints.innerHTML = wordHTML;
+    hints.innerHTML = currentWord;
+
+    man = `화면에 보이는 단어 또는 숫자를 시간내에 큰 소리로 말했을때에
+                  말한 단어 또는 숫자가 화면에 나타나며, 이때 두 단어 또는
+                  숫자가 같으면 정답이다. 다시 게임하려면 현재 단어를 큰소리로
+                  말하면 된다. 점수는 리셋될 것이다.`;
+    manual.innerHTML = man;
+
     diagnostic.textContent = "";
     console.log("시작! 하고 말하면 시작한다.");
 
@@ -83,6 +91,7 @@ recognition.onresult = function (event) {
     if (spokenWord == currentWord) {
       console.log("시작합니다");
 
+      manual.innerHTML = "";
       state = "start";
       count = 0;
       rightNum = 0;
