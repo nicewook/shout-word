@@ -132,27 +132,24 @@ recognition.onresult = function (event) {
     wrong.innerHTML = wrongNum;
   }
   count++;
+  if (count > 10) {
+    console.log("10문제 완료");
+    setTimeout(function () {
+      start();
+    }, 2000);
+  }
 
   console.log("Confidence: " + event.results[0][0].confidence);
 };
 
-recognition.onend = function () {
-  if (count === 10) {
-    console.log("10문제 완료");
-    setTimeout(function () {
+recognition.onerror = function () {
+  setTimeout(function () {
+    if (state === "ready") {
       start();
-    }, 3000);
-    return;
-  }
-  if (resultOK === false) {
-    setTimeout(function () {
-      if (state === "ready") {
-        start();
-      } else {
-        restart();
-      }
-    }, 3000);
-  }
+    } else {
+      restart();
+    }
+  }, 3000);
 };
 
 function restart() {
