@@ -107,12 +107,17 @@ recognition.onresult = function (event) {
       right.innerHTML = rightNum;
       wrongNum = 0;
       wrong.innerHTML = wrongNum;
+
+      setTimeout(function () {
+        restart();
+      }, 1000);
       return;
     } else {
       console.log("시작하고 제대로 말해요!");
       // diagnostic.textContent = spokenWord;
       resultMessage = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
       hints.innerHTML = resultMessage;
+
       setTimeout(function () {
         start();
       }, 1000);
@@ -124,12 +129,12 @@ recognition.onresult = function (event) {
     result.innerHTML = "정답입니다";
     document.body.style.backgroundColor = "green";
     rightNum++;
-    right.innerHTML = rightNum;
+    right.innerHTML = "정답수" + rightNum;
   } else {
     result.innerHTML = "오답입니다";
     document.body.style.backgroundColor = "red";
     wrongNum++;
-    wrong.innerHTML = wrongNum;
+    wrong.innerHTML = "오답수" + wrongNum;
   }
   count++;
   if (count > 10) {
@@ -142,7 +147,14 @@ recognition.onresult = function (event) {
   console.log("Confidence: " + event.results[0][0].confidence);
 };
 
-recognition.onerror = function () {
+recognition.onerror = function (e) {
+  msg = "못알아 들었습니다";
+  hints.innerHTML = msg;
+
+  errMsg = `<p style="font-size:5px">` + e + "</p>";
+  errorMessage.innerHTML = errMsg;
+  console.log(errMsg);
+
   setTimeout(function () {
     if (state === "ready") {
       start();
