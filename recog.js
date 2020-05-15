@@ -45,6 +45,7 @@ var result = document.querySelector(".result");
 var right = document.querySelector(".right");
 var wrong = document.querySelector(".wrong");
 var manual = document.querySelector(".manual");
+var errorMessage = document.querySelector(".error-message");
 
 let state = "ready";
 let count = 0;
@@ -147,11 +148,11 @@ recognition.onresult = function (event) {
   console.log("Confidence: " + event.results[0][0].confidence);
 };
 
-recognition.onerror = function (e) {
+recognition.onerror = function (event) {
   msg = "못알아 들었습니다";
   hints.innerHTML = msg;
 
-  errMsg = `<p style="font-size:5px">` + e + "</p>";
+  errMsg = `<p style="font-size:5px">` + event.error + "</p>";
   errorMessage.innerHTML = errMsg;
   console.log(errMsg);
 
@@ -177,10 +178,10 @@ recognition.onspeechend = function () {
   recognition.stop();
 };
 
-recognition.onnomatch = function (event) {
-  diagnostic.textContent = "못 알아 들었어요";
-};
+// recognition.onnomatch = function (event) {
+//   diagnostic.textContent = "못 알아 들었어요";
+// };
 
-recognition.onerror = function (event) {
-  diagnostic.textContent = "못 알아 들었어요: " + event.error;
-};
+// recognition.onerror = function (event) {
+//   diagnostic.textContent = "못 알아 들었어요: " + event.error;
+// };
