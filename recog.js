@@ -56,7 +56,7 @@ function start() {
   setTimeout(function () {
     recognition.start();
 
-    currentWord = "시작";
+    currentWord = `"<b>시작"</b> 이라고 말해보세요`;
     hints.innerHTML = currentWord;
 
     man = `<div class="card card-body bg-secondary text-white">
@@ -107,8 +107,12 @@ recognition.onresult = function (event) {
       return;
     } else {
       console.log("시작하고 제대로 말해요!");
-      diagnostic.textContent = spokenWord;
-      start();
+      // diagnostic.textContent = spokenWord;
+      resultMessage = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
+      hints.innerHTML = resultMessage;
+      setTimeout(function () {
+        start();
+      }, 1000);
       return;
     }
   }
@@ -138,7 +142,11 @@ recognition.onend = function () {
     return;
   }
   setTimeout(function () {
-    restart();
+    if (state === "ready") {
+      start();
+    } else {
+      restart();
+    }
   }, 3000);
 };
 
@@ -146,7 +154,7 @@ function restart() {
   document.body.style.backgroundColor = "#212529";
   recognition.start();
   currentWord = animal[Math.floor(Math.random() * animal.length)];
-  wordHTML = currentWord;
+  wordHTML = "문제: " + currentWord;
   hints.innerHTML = wordHTML;
   console.log("Ready to receive a word.");
 }
