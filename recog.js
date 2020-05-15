@@ -79,9 +79,9 @@ function start() {
 
     count = 0;
     rightNum = 0;
-    right.innerHTML = rightNum;
+    // right.innerHTML = "";
     wrongNum = 0;
-    wrong.innerHTML = wrongNum;
+    // wrong.innerHTML = "";
   }, 1000);
 }
 
