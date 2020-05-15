@@ -85,6 +85,11 @@ function start() {
   }, 1000);
 }
 
+function displayScore() {
+  right.innerHTML = "정답개수: " + rightNum;
+  wrong.innerHTML = "오답개수: " + wrongNum;
+}
+
 recognition.onresult = function (event) {
   // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
   // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
@@ -105,9 +110,8 @@ recognition.onresult = function (event) {
       state = "start";
       count = 0;
       rightNum = 0;
-      right.innerHTML = rightNum;
       wrongNum = 0;
-      wrong.innerHTML = wrongNum;
+      displayScore();
 
       setTimeout(function () {
         restart();
@@ -130,12 +134,12 @@ recognition.onresult = function (event) {
     result.innerHTML = "정답입니다";
     document.body.style.backgroundColor = "green";
     rightNum++;
-    right.innerHTML = "정답수" + rightNum;
+    displayScore();
   } else {
     result.innerHTML = "오답입니다";
     document.body.style.backgroundColor = "red";
     wrongNum++;
-    wrong.innerHTML = "오답수" + wrongNum;
+    displayScore();
   }
   count++;
   console.log("Confidence: " + event.results[0][0].confidence);
