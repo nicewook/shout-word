@@ -139,9 +139,11 @@ recognition.onresult = function (event) {
   }
   count++;
   console.log("Confidence: " + event.results[0][0].confidence);
-  setTimeout(function () {
-    restart();
-  }, 2000);
+  restart();
+  // setTimeout(function () {
+  //   restart();
+  // }, 2000);
+
   // if (count > 10) {
   //   console.log("10문제 완료");
   //   setTimeout(function () {
@@ -165,6 +167,7 @@ recognition.onerror = function (event) {
 
   setTimeout(function () {
     if (state === "ready") {
+      errorMessage.innerHTML = "";
       start();
     } else {
       restart();
