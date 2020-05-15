@@ -50,6 +50,7 @@ let state = "ready";
 let count = 0;
 let rightNum = 0;
 let wrongNum = 0;
+let resultOK = false;
 
 var wordHTML = "";
 function start() {
@@ -58,7 +59,7 @@ function start() {
 
     currentWord = "시작";
 
-    hints.innerHTML = "<b>" + currentWord + "</b> 이라고 말해보세요";
+    hints.innerHTML = `<b>"시작"</b> 이라고 말해보세요`;
 
     man = `<div class="card card-body bg-secondary text-white">
     <h5 class="normal w700">게임 방법</h5>
@@ -92,6 +93,7 @@ recognition.onresult = function (event) {
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
+  resultOK = true;
   var spokenWord = event.results[0][0].transcript;
 
   if (state === "ready") {
@@ -142,13 +144,15 @@ recognition.onend = function () {
     }, 3000);
     return;
   }
-  setTimeout(function () {
-    if (state === "ready") {
-      start();
-    } else {
-      restart();
-    }
-  }, 3000);
+  if (resultOK === false) {
+    setTimeout(function () {
+      if (state === "ready") {
+        start();
+      } else {
+        restart();
+      }
+    }, 3000);
+  }
 };
 
 function restart() {
