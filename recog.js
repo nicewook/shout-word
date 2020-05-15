@@ -56,8 +56,9 @@ function start() {
   setTimeout(function () {
     recognition.start();
 
-    currentWord = `"<b>시작"</b> 이라고 말해보세요`;
-    hints.innerHTML = currentWord;
+    currentWord = "시작";
+
+    hints.innerHTML = "<b>" + currentWord + "</b> 이라고 말해보세요";
 
     man = `<div class="card card-body bg-secondary text-white">
     <h5 class="normal w700">게임 방법</h5>
