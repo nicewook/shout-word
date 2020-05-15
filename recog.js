@@ -138,14 +138,19 @@ recognition.onresult = function (event) {
     wrong.innerHTML = "오답수" + wrongNum;
   }
   count++;
+  console.log("Confidence: " + event.results[0][0].confidence);
+
   if (count > 10) {
     console.log("10문제 완료");
     setTimeout(function () {
       start();
     }, 2000);
+  } else {
+    console.log("재시작");
+    setTimeout(function () {
+      restart();
+    }, 2000);
   }
-
-  console.log("Confidence: " + event.results[0][0].confidence);
 };
 
 recognition.onerror = function (event) {
