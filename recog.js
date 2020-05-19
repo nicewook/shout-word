@@ -136,12 +136,12 @@ recognition.onresult = function (event) {
   } else {
     let resultMsg = "";
     if (spokenWord == currentWord) {
-      if (spokenWorld != "시작") {
-        resultMsg = "정답입니다";
-      } else {
-        resultMsg = "";
-      }
-      // resultMsg = "정답입니다";
+      // if (spokenWorld != "시작") {
+      //   resultMsg = "정답입니다";
+      // } else {
+      //   resultMsg = "";
+      // }
+      resultMsg = "정답입니다";
       rightNum++;
       // document.body.style.backgroundColor = "green";
       // displayScore();
