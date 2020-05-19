@@ -100,7 +100,7 @@ recognition.onresult = function (event) {
 
   var spokenWord = event.results[0][0].transcript;
 
-  if (state === "ready") {
+  if (state == "ready") {
     if (spokenWord == currentWord) {
       console.log("시작합니다");
 
