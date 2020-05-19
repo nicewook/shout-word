@@ -134,7 +134,6 @@ recognition.onresult = function (event) {
       return;
     }
   } else {
-    diagnostic.textContent = spokenWord;
     let resultMsg = "";
     if (spokenWord == currentWord) {
       if (spokenWorld != "시작") {
@@ -159,6 +158,7 @@ recognition.onresult = function (event) {
       // right.innerHTML = "정답개수: " + rightNum;
       wrong.innerHTML = "오답개수: " + wrongNum;
     }
+    diagnostic.textContent = spokenWord;
     count++;
     console.log("Confidence: " + event.results[0][0].confidence);
     // restart();
