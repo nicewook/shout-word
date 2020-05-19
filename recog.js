@@ -99,7 +99,7 @@ recognition.onresult = function (event) {
   // These also have getters so they can be accessed like arrays.
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
-  resultOK = true;
+
   var spokenWord = event.results[0][0].transcript;
 
   if (state === "ready") {
@@ -135,7 +135,7 @@ recognition.onresult = function (event) {
   }
   diagnostic.textContent = spokenWord;
   let resultMsg = "";
-  if (spokenWord === currentWord) {
+  if (spokenWord == currentWord) {
     // if (spokenWorld !== "시작") {
     //   resultMsg = "정답입니다";
     // }
@@ -145,7 +145,7 @@ recognition.onresult = function (event) {
     // displayScore();
     result.innerHTML = resultMsg;
     right.innerHTML = "정답개수: " + rightNum;
-    wrong.innerHTML = "오답개수: " + wrongNum;
+    // wrong.innerHTML = "오답개수: " + wrongNum;
   } else {
     resultMsg = "오답입니다";
 
@@ -153,7 +153,7 @@ recognition.onresult = function (event) {
     wrongNum++;
     // displayScore();
     result.innerHTML = resultMsg;
-    right.innerHTML = "정답개수: " + rightNum;
+    // right.innerHTML = "정답개수: " + rightNum;
     wrong.innerHTML = "오답개수: " + wrongNum;
   }
   count++;
