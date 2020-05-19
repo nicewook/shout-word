@@ -195,14 +195,14 @@ recognition.onerror = function (event) {
   errorMessage.innerHTML = errMsg;
   console.log(errMsg);
 
-  setTimeout(function () {
-    if (state === "ready") {
-      errorMessage.innerHTML = "";
-      start();
-    } else {
-      restart();
-    }
-  }, 3000);
+  // setTimeout(function () {
+  //   if (state === "ready") {
+  //     errorMessage.innerHTML = "";
+  //     start();
+  //   } else {
+  //     restart();
+  //   }
+  // }, 3000);
 };
 
 function restart() {
