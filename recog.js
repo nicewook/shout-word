@@ -156,7 +156,7 @@ recognition.onresult = function (event) {
     diagnostic.textContent = spokenWord;
     count++;
     console.log("Confidence: " + event.results[0][0].confidence);
-    if (count > 10) {
+    if (count >= 10) {
       console.log("10문제 완료");
       setTimeout(function () {
         start();
