@@ -44,7 +44,7 @@ function start() {
   console.log("start()");
   recognition.start();
 
-  hints.innerHTML = `<b>"동물, 탈것, 먹을것"</b> 중 하나를 외치면 시작합니다`;
+  hints.innerHTML = `<b>"동물, 부릉부릉, 냠냠"</b> 중 하나를 외치면 시작합니다`;
 
   manualMsg = `<div class="card card-body bg-secondary text-white">
     <h5 class="normal w700">게임 방법</h5>
@@ -62,6 +62,10 @@ function start() {
   count = 0;
   rightNum = 0;
   wrongNum = 0;
+
+  result.innerHTML = "";
+  right.innerHTML = "";
+  wrong.innerHTML = "";
 }
 
 function displayResult() {
