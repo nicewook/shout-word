@@ -1,40 +1,25 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-var SpeechRecognitionEvent =
-  SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-var animal = [
-  "돼지",
-  "개",
-  "고양이",
-  "쥐",
-  "염소",
-  "양",
-  "말",
-  "호랑이",
-  "사자",
-  "사슴",
-  "코끼리",
-  "악어",
-  "기린",
-  "코뿔소",
-  "원숭이",
-  "나무늘보",
-  "고슴도치",
-  "얼룩말",
-  "젖소",
-  "오리",
-];
-var grammar =
-  "#JSGF V1.0; grammar animal; public <animal> = " + animal.join(" | ") + " ;";
+var animal = ["돼지", "개", "고양이", "쥐", "염소", "양", "말", "호랑이", "사자", "사슴", "코끼리", "악어", "기린", "코뿔소", "원숭이", "나무늘보", "고슴도치", "얼룩말", "젖소", "오리",];
+var car = ["경찰차", "택시", "버스", "기차", "비행기", "오토바이", "트럭", "불도저", "소방차", "구급차", "헬리콥터", "견인차", "청소차", "포크레인", "자전거", "레미콘", "지하철", "전투기", "지게차", "우주선",];
+var food = ["치킨", "김밥", "아이스크림", "멘토스", "젤리", "빵", "계란", "딸기", "케잌", "참외", "수박", "라면", "바나나", "쥬스", "시금치", "어묵", "감자튀김", "포도", "우유", "사탕",];
+
+var grammarAnimal = "#JSGF V1.0; grammar animal; public <animal> = " + animal.join(" | ") + " ;";
+var grammarCar = "#JSGF V1.0; grammar car; public <car> = " + car.join(" | ") + " ;";
+var grammarFood = "#JSGF V1.0; grammar food; public <food> = " + food.join(" | ") + " ;";
 
 var recognition = new SpeechRecognition();
-var speechRecognitionList = new SpeechGrammarList();
-speechRecognitionList.addFromString(grammar, 1);
-recognition.grammars = speechRecognitionList;
+var speechRecognitionListAnimal = new SpeechGrammarList();
+var speechRecognitionListCar = new SpeechGrammarList();
+var speechRecognitionListFood = new SpeechGrammarList();
+speechRecognitionListAnimal.addFromString(grammarAnimal, 1);
+speechRecognitionListCar.addFromString(grammarCar, 1);
+speechRecognitionListFood.addFromString(grammarFood, 1);
+
 recognition.continuous = false;
-recognition.lang = "ko-KR";
-// recognition.lang = 'en-US';
+recognition.lang = "ko-KR";  // 'en-US'
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
@@ -51,17 +36,17 @@ let state = "ready";
 let count = 0;
 let rightNum = 0;
 let wrongNum = 0;
-let resultOK = false;
-
+let resultMsg = "";
 var wordHTML = "";
+
+// first start
 function start() {
+  console.log("start()");
   recognition.start();
 
-  currentWord = "시작";
+  hints.innerHTML = `<b>"동물, 탈것, 먹을것"</b> 중 하나를 외치면 시작합니다`;
 
-  hints.innerHTML = `<b>"시작"</b> 이라고 말해보세요`;
-
-  man = `<div class="card card-body bg-secondary text-white">
+  manualMsg = `<div class="card card-body bg-secondary text-white">
     <h5 class="normal w700">게임 방법</h5>
     <p class="normal w400">
       화면에 보이는 단어 또는 숫자를 시간내에 큰 소리로 말했을때에
@@ -70,22 +55,35 @@ function start() {
       말하면 된다. 점수는 리셋될 것이다.
     </p>
   </div>`;
-
-  manual.innerHTML = man;
-
+  manual.innerHTML = manualMsg;
   diagnostic.textContent = "";
-  console.log("시작! 하고 말하면 시작한다.");
 
+  // initialize
   count = 0;
   rightNum = 0;
-  // right.innerHTML = "";
   wrongNum = 0;
-  // wrong.innerHTML = "";
 }
 
-function displayScore() {
+function displayResult() {
+  result.innerHTML = resultMsg;
   right.innerHTML = "정답개수: " + rightNum;
   wrong.innerHTML = "오답개수: " + wrongNum;
+}
+
+let wordKind = "animal"
+function prepareAnimal() {
+  wordKind = "animal"
+  recognition.grammars = speechRecognitionListAnimal;
+}
+
+function prepareCar() {
+  wordKind = "car"
+  recognition.grammars = speechRecognitionListCar;
+}
+
+function prepareFood() {
+  wordKind = "food"
+  recognition.grammars = speechRecognitionListFood;
 }
 
 recognition.onresult = function (event) {
@@ -101,32 +99,38 @@ recognition.onresult = function (event) {
   let spokenWord = event.results[0][0].transcript;
 
   if (state == "ready") {
-    if (spokenWord == currentWord) {
+    if (spokenWord == "동물" || spokenWord == "부릉부릉" || spokenWord == "냠냠") {  // start condition
       console.log("시작합니다");
+      manual.innerHTML = "";  // remove manual
 
-      manual.innerHTML = "";
+      // reset
       state = "start";
       count = 0;
       rightNum = 0;
       wrongNum = 0;
-      // displayScore();
-      result.innerHTML = "";
-      right.innerHTML = "정답개수: " + rightNum;
-      wrong.innerHTML = "오답개수: " + wrongNum;
+      resultMsg = "";
+      displayResult();
+
+      if (spokenWord == "동물") {
+        prepareAnimal();
+      } else if (spokenWord == "부릉부릉") {
+        prepareCar();
+      } else {  // 냠냠
+        prepareFood();
+      }
 
       setTimeout(function () {
         restart();
       }, 1000);
       return;
     } else {
-      console.log("시작하고 제대로 말해요!");
-      // diagnostic.textContent = spokenWord;
+      console.log("시작 실패!");
       if (spokenWord !== "") {
-        resultMessage = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
+        resultMsg = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
       } else {
-        resultMessage = "";
+        resultMsg = "";
       }
-      hints.innerHTML = resultMessage;
+      hints.innerHTML = resultMsg;
 
       setTimeout(function () {
         start();
@@ -134,36 +138,24 @@ recognition.onresult = function (event) {
       return;
     }
   } else {
-    let resultMsg = "";
     if (spokenWord == currentWord) {
-      if (spokenWorld != "시작") {
-        resultMsg = "정답입니다";
-        rightNum++;
-      } else {
-        resultMsg = "";
-      }
-      // resultMsg = "정답입니다";
-      // document.body.style.backgroundColor = "green";
-      // displayScore();
+      // if (spokenWord != "시작") {
+      //   resultMsg = "정답입니다";
+      //   rightNum++;
+      // } else {
+      //   resultMsg = "";
+      // }
+      resultMsg = "정답입니다";
+      rightNum++;
     } else {
       resultMsg = "오답입니다";
-
-      // document.body.style.backgroundColor = "red";
       wrongNum++;
-      // displayScore();
     }
-    result.innerHTML = resultMsg;
-    right.innerHTML = "정답개수: " + rightNum;
-    wrong.innerHTML = "오답개수: " + wrongNum;
+    displayResult();
 
     diagnostic.textContent = spokenWord;
     count++;
     console.log("Confidence: " + event.results[0][0].confidence);
-    // restart();
-    // setTimeout(function () {
-    //   restart();
-    // }, 2000);
-
     if (count > 10) {
       console.log("10문제 완료");
       setTimeout(function () {
@@ -207,8 +199,16 @@ recognition.onerror = function (event) {
 
 function restart() {
   document.body.style.backgroundColor = "#212529";
+  diagnostic.textContent = "";
   recognition.start();
-  currentWord = animal[Math.floor(Math.random() * animal.length)];
+  if (wordKind == "animal") {
+    currentWord = animal[Math.floor(Math.random() * animal.length)];
+  } else if (wordKind == "car") {
+    currentWord = car[Math.floor(Math.random() * car.length)];
+  } else {
+    currentWord = food[Math.floor(Math.random() * food.length)];
+  }
+  
   wordHTML = "문제: " + currentWord;
 
   hints.innerHTML = wordHTML;
