@@ -139,14 +139,13 @@ recognition.onresult = function (event) {
       result.innerHTML = "";
     } else {
       result.innerHTML = "정답입니다";
-      rightNum++;
     }
-
-    document.body.style.backgroundColor = "green";
+    rightNum++;
+    // document.body.style.backgroundColor = "green";
     displayScore();
   } else {
     result.innerHTML = "오답입니다";
-    document.body.style.backgroundColor = "red";
+    // document.body.style.backgroundColor = "red";
     wrongNum++;
     displayScore();
   }
