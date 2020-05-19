@@ -136,6 +136,8 @@ recognition.onresult = function (event) {
   if (spokenWord == currentWord) {
     if (spokenWorld != "시작") {
       resultMsg = "정답입니다";
+    } else {
+      resultMsg = "";
     }
     // resultMsg = "정답입니다";
     rightNum++;
