@@ -109,7 +109,10 @@ recognition.onresult = function (event) {
       count = 0;
       rightNum = 0;
       wrongNum = 0;
-      displayScore();
+      // displayScore();
+      result.innerHTML = "";
+      right.innerHTML = "정답개수: " + rightNum;
+      wrong.innerHTML = "오답개수: " + wrongNum;
 
       setTimeout(function () {
         restart();
@@ -130,49 +133,50 @@ recognition.onresult = function (event) {
       }, 1000);
       return;
     }
-  }
-  diagnostic.textContent = spokenWord;
-  let resultMsg = "";
-  if (spokenWord == currentWord) {
-    if (spokenWorld != "시작") {
-      resultMsg = "정답입니다";
+  } else {
+    diagnostic.textContent = spokenWord;
+    let resultMsg = "";
+    if (spokenWord == currentWord) {
+      if (spokenWorld != "시작") {
+        resultMsg = "정답입니다";
+      } else {
+        resultMsg = "";
+      }
+      // resultMsg = "정답입니다";
+      rightNum++;
+      // document.body.style.backgroundColor = "green";
+      // displayScore();
+      result.innerHTML = resultMsg;
+      right.innerHTML = "정답개수: " + rightNum;
+      // wrong.innerHTML = "오답개수: " + wrongNum;
     } else {
-      resultMsg = "";
+      resultMsg = "오답입니다";
+
+      // document.body.style.backgroundColor = "red";
+      wrongNum++;
+      // displayScore();
+      result.innerHTML = resultMsg;
+      // right.innerHTML = "정답개수: " + rightNum;
+      wrong.innerHTML = "오답개수: " + wrongNum;
     }
-    // resultMsg = "정답입니다";
-    rightNum++;
-    // document.body.style.backgroundColor = "green";
-    // displayScore();
-    result.innerHTML = resultMsg;
-    right.innerHTML = "정답개수: " + rightNum;
-    // wrong.innerHTML = "오답개수: " + wrongNum;
-  } else {
-    resultMsg = "오답입니다";
+    count++;
+    console.log("Confidence: " + event.results[0][0].confidence);
+    // restart();
+    // setTimeout(function () {
+    //   restart();
+    // }, 2000);
 
-    // document.body.style.backgroundColor = "red";
-    wrongNum++;
-    // displayScore();
-    result.innerHTML = resultMsg;
-    // right.innerHTML = "정답개수: " + rightNum;
-    wrong.innerHTML = "오답개수: " + wrongNum;
-  }
-  count++;
-  console.log("Confidence: " + event.results[0][0].confidence);
-  // restart();
-  // setTimeout(function () {
-  //   restart();
-  // }, 2000);
-
-  if (count > 10) {
-    console.log("10문제 완료");
-    setTimeout(function () {
-      start();
-    }, 2000);
-  } else {
-    console.log("재시작");
-    setTimeout(function () {
-      restart();
-    }, 1000);
+    if (count > 10) {
+      console.log("10문제 완료");
+      setTimeout(function () {
+        start();
+      }, 2000);
+    } else {
+      console.log("재시작");
+      setTimeout(function () {
+        restart();
+      }, 1000);
+    }
   }
 };
 
