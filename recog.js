@@ -134,7 +134,7 @@ recognition.onresult = function (event) {
   diagnostic.textContent = spokenWord;
   let resultMsg = "";
   if (spokenWord == currentWord) {
-    if (spokenWorld !== "시작") {
+    if (spokenWorld != "시작") {
       resultMsg = "정답입니다";
     }
     // resultMsg = "정답입니다";
