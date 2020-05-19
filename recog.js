@@ -55,14 +55,13 @@ let resultOK = false;
 
 var wordHTML = "";
 function start() {
-  setTimeout(function () {
-    recognition.start();
+  recognition.start();
 
-    currentWord = "시작";
+  currentWord = "시작";
 
-    hints.innerHTML = `<b>"시작"</b> 이라고 말해보세요`;
+  hints.innerHTML = `<b>"시작"</b> 이라고 말해보세요`;
 
-    man = `<div class="card card-body bg-secondary text-white">
+  man = `<div class="card card-body bg-secondary text-white">
     <h5 class="normal w700">게임 방법</h5>
     <p class="normal w400">
       화면에 보이는 단어 또는 숫자를 시간내에 큰 소리로 말했을때에
@@ -72,17 +71,16 @@ function start() {
     </p>
   </div>`;
 
-    manual.innerHTML = man;
+  manual.innerHTML = man;
 
-    diagnostic.textContent = "";
-    console.log("시작! 하고 말하면 시작한다.");
+  diagnostic.textContent = "";
+  console.log("시작! 하고 말하면 시작한다.");
 
-    count = 0;
-    rightNum = 0;
-    // right.innerHTML = "";
-    wrongNum = 0;
-    // wrong.innerHTML = "";
-  }, 1000);
+  count = 0;
+  rightNum = 0;
+  // right.innerHTML = "";
+  wrongNum = 0;
+  // wrong.innerHTML = "";
 }
 
 function displayScore() {
