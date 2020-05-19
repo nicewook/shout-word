@@ -155,7 +155,7 @@ recognition.onresult = function (event) {
     result.innerHTML = resultMsg;
     right.innerHTML = "정답개수: " + rightNum;
     wrong.innerHTML = "오답개수: " + wrongNum;
-    wrong.innerHTML = "오답개수: " + wrongNum;
+
     diagnostic.textContent = spokenWord;
     count++;
     console.log("Confidence: " + event.results[0][0].confidence);
