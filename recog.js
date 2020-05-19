@@ -184,13 +184,16 @@ recognition.onerror = function (event) {
   msg = "못알아 들었습니다";
   hints.innerHTML = msg;
 
-  let eMsg = "";
+  // let eMsg = "";
+  // if (event.error == "") {
+  //   eMsg = "no error";
+  // } else {
+  //   eMsg = event.error;
+  // }
   if (event.error == "") {
-    eMsg = "no error";
-  } else {
-    eMsg = event.error;
+    return;
   }
-  errMsg = `<p style="font-size:8px">` + eMsg + "</p>";
+  errMsg = `<p style="font-size:8px">` + event.error + "</p>";
   errorMessage.innerHTML = errMsg;
   console.log(errMsg);
 
