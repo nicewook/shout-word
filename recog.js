@@ -142,12 +142,16 @@ recognition.onresult = function (event) {
     }
     rightNum++;
     // document.body.style.backgroundColor = "green";
-    displayScore();
+    // displayScore();
+    right.innerHTML = "정답개수: " + rightNum;
+    wrong.innerHTML = "오답개수: " + wrongNum;
   } else {
     result.innerHTML = "오답입니다";
     // document.body.style.backgroundColor = "red";
     wrongNum++;
-    displayScore();
+    // displayScore();
+    right.innerHTML = "정답개수: " + rightNum;
+    wrong.innerHTML = "오답개수: " + wrongNum;
   }
   count++;
   console.log("Confidence: " + event.results[0][0].confidence);
