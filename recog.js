@@ -134,22 +134,24 @@ recognition.onresult = function (event) {
     }
   }
   diagnostic.textContent = spokenWord;
+  let resultMsg = "";
   if (spokenWord === currentWord) {
-    if (spokenWorld === "시작") {
-      result.innerHTML = "";
-    } else {
-      result.innerHTML = "정답입니다";
+    if (spokenWorld !== "시작") {
+      resultMsg = "정답입니다";
     }
     rightNum++;
     // document.body.style.backgroundColor = "green";
     // displayScore();
+    result.innerHTML = resultMsg;
     right.innerHTML = "정답개수: " + rightNum;
     wrong.innerHTML = "오답개수: " + wrongNum;
   } else {
-    result.innerHTML = "오답입니다";
+    resultMsg = "오답입니다";
+
     // document.body.style.backgroundColor = "red";
     wrongNum++;
     // displayScore();
+    result.innerHTML = resultMsg;
     right.innerHTML = "정답개수: " + rightNum;
     wrong.innerHTML = "오답개수: " + wrongNum;
   }
