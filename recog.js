@@ -190,9 +190,9 @@ recognition.onerror = function (event) {
   // } else {
   //   eMsg = event.error;
   // }
-  if (event.error == "") {
-    return;
-  }
+  // if (event.error == "") {
+  //   return;
+  // }
   errMsg = `<p style="font-size:8px">` + event.error + "</p>";
   errorMessage.innerHTML = errMsg;
   console.log(errMsg);
