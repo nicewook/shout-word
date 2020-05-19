@@ -120,7 +120,11 @@ recognition.onresult = function (event) {
     } else {
       console.log("시작하고 제대로 말해요!");
       // diagnostic.textContent = spokenWord;
-      resultMessage = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
+      if (spokenWord !== "") {
+        resultMessage = "</b>" + spokenWord + `</b> 라고 잘못 말하셨어요`;
+      } else {
+        resultMessage = "";
+      }
       hints.innerHTML = resultMessage;
 
       setTimeout(function () {
@@ -131,9 +135,14 @@ recognition.onresult = function (event) {
   }
   diagnostic.textContent = spokenWord;
   if (spokenWord === currentWord) {
-    result.innerHTML = "정답입니다";
+    if (spokenWorld === "시작") {
+      result.innerHTML = "";
+    } else {
+      result.innerHTML = "정답입니다";
+      rightNum++;
+    }
+
     document.body.style.backgroundColor = "green";
-    rightNum++;
     displayScore();
   } else {
     result.innerHTML = "오답입니다";
@@ -184,7 +193,10 @@ function restart() {
   recognition.start();
   currentWord = animal[Math.floor(Math.random() * animal.length)];
   wordHTML = "문제: " + currentWord;
+
   hints.innerHTML = wordHTML;
+  result.innerHTML = "";
+
   console.log("Ready to receive a word.");
 }
 
