@@ -113,7 +113,7 @@ recognition.onresult = function (event) {
       rightNum = 0;
       wrongNum = 0;
       resultMsg = "";
-      displayResult();
+      // displayResult();
 
       if (spokenWord == "동물") {
         prepareAnimal();
