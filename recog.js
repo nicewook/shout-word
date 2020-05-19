@@ -98,7 +98,7 @@ recognition.onresult = function (event) {
   // The second [0] returns the SpeechRecognitionAlternative at position 0.
   // We then return the transcript property of the SpeechRecognitionAlternative object
 
-  var spokenWord = event.results[0][0].transcript;
+  let spokenWord = event.results[0][0].transcript;
 
   if (state == "ready") {
     if (spokenWord == currentWord) {
