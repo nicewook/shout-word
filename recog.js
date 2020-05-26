@@ -187,37 +187,11 @@ recognition.onerror = function (event) {
   msg = "못알아 들었습니다";
   hints.innerHTML = msg;
 
-  // let eMsg = "";
-  // if (event.error == "") {
-  //   eMsg = "no error";
-  // } else {
-  //   eMsg = event.error;
-  // }
-  // if (event.error == "") {
-  //   return;
-  // }
   errMsg = `<p style="font-size:8px">` + event.error + "</p>";
   errorMessage.innerHTML = errMsg;
   console.log(errMsg);
-
-  // setTimeout(function () {
-  //   if (state === "ready") {
-  //     errorMessage.innerHTML = "";
-  //     start();
-  //   } else {
-  //     restart();
-  //   }
-  // }, 3000);
 };
 
 recognition.onspeechend = function () {
   recognition.stop();
 };
-
-// recognition.onnomatch = function (event) {
-//   diagnostic.textContent = "못 알아 들었어요";
-// };
-
-// recognition.onerror = function (event) {
-//   diagnostic.textContent = "못 알아 들었어요: " + event.error;
-// };

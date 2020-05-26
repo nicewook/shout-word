@@ -27,7 +27,7 @@ var wordHTML = "";
 // first start
 function startGame() {
   console.log("start()");
-  hMsg = `<b>동물, 탈것, 먹을것</b>`;
+  hMsg = `<b>동물, 탈 것, 먹을 것</b>`;
   dMsg = "";
   rMsg = "원하는 문제를 말해보세요";
   hints.innerHTML = hMsg;
