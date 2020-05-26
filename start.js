@@ -37,8 +37,7 @@ function startGame() {
 }
 
 function startProblem() {
-  document.id.action = "problem.html";
-  document.id.submit();
+  window.location.href = "./problem.html";
 }
 
 // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
