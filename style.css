@@ -22,8 +22,24 @@
   font-family: "LotteMartHappy", sans-serif;
 }
 
+.myDiv {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.myDiv2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
 .normal {
   font-style: normal;
+}
+
+.h1-center {
+  margin-top: 50px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .w250 {

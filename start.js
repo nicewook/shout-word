@@ -25,13 +25,15 @@ let resultMsg = "";
 var wordHTML = "";
 
 // first start
-function start() {
+function startGame() {
   console.log("start()");
-
-  hints.innerHTML = `<b>"동물, 탈것, 먹을것"</b>`;
-  diagnostic.innerHTML = "";
-  result.innerHTML = "원하는 문제를 말해보세요";
-  // recognition.start();
+  hMsg = `<b>동물, 탈것, 먹을것</b>`;
+  dMsg = "";
+  rMsg = "원하는 문제를 말해보세요";
+  hints.innerHTML = hMsg;
+  diagnostic.innerHTML = dMsg;
+  result.innerHTML = rMsg;
+  recognition.start();
 }
 
 function startProblem() {
@@ -84,8 +86,8 @@ recognition.onerror = function (event) {
   msg = "못알아 들었습니다";
   result.innerHTML = msg;
 
-  errMsg = `<p style="font-size:10px">` + event.error + "</p>";
-  errorMessage.innerHTML = errMsg;
+  errMsg = `<p style="font-size:16px">` + event.error + "</p>";
+  errorMsg.innerHTML = errMsg;
   console.log(errMsg);
 };
 
