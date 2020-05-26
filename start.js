@@ -27,11 +27,11 @@ var wordHTML = "";
 // first start
 function start() {
   console.log("start()");
-  recognition.start();
 
   hints.innerHTML = `<b>"동물, 탈것, 먹을것"</b>`;
-  diagnostic.textContent = "";
+  diagnostic.innerHTML = "";
   result.innerHTML = "원하는 문제를 말해보세요";
+  // recognition.start();
 }
 
 function startProblem() {
