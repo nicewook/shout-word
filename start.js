@@ -72,7 +72,7 @@ recognition.onresult = function (event) {
     result.innerHTML = resultMsg;
     // displayResult();
 
-    let start = function () {};
+    var start = function () {};
     if (spokenWord == "동물") {
       start = startAnimalWord;
     } else if (spokenWord == "탈 것") {
@@ -82,7 +82,7 @@ recognition.onresult = function (event) {
     }
 
     setTimeout(function () {
-      startProblem();
+      start();
     }, 1000);
     return;
   } else {
