@@ -135,7 +135,7 @@ function vehicleStart() {
 }
 
 function foodStart() {
-  prepareFoodl();
+  prepareFood();
   recognition.start();
 
   currentWord = food[Math.floor(Math.random() * food.length)];
