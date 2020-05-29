@@ -82,8 +82,8 @@ recognition.onresult = function (event) {
     }
 
     setTimeout(function () {
-      // startWordFunc();
-      startAnimalWord();
+      startWordFunc();
+      // startAnimalWord();
     }, 1000);
     return;
   } else {
