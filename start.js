@@ -3,7 +3,7 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent =
   SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-var start = ["동물", "탈것", "먹을것"];
+var start = ["동물", "탈 것", "먹을 것"];
 var grammarStart =
   "#JSGF V1.0; grammar start; public <start> = " + start.join(" | ") + " ;";
 

@@ -149,15 +149,17 @@ function foodStart() {
 
   console.log("Ready to receive a word.");
 }
+
 function restart() {
   recognition.start();
 
   // no same word contagiously
   var nextWord;
+  console.log("wordkind: ", wordKind)
   while (true) {
-    if (wordKind === animal) {
+    if (wordKind === "animal") {
       nextWord = animal[Math.floor(Math.random() * animal.length)];
-    } else if (wordKind === vehicle) {
+    } else if (wordKind === "vehicle") {
       nextWord = vehicle[Math.floor(Math.random() * vehicle.length)];
     } else {
       nextWord = food[Math.floor(Math.random() * food.length)];
@@ -167,6 +169,12 @@ function restart() {
     }
     console.log("the same c to receive a word.");
   }
+  console.log(
+    "nextWord should not the same as currentWord: " +
+      currentWord +
+      " != " +
+      nextWord
+  );
   currentWord = nextWord;
 
   wordMsg = currentWord;
@@ -175,13 +183,6 @@ function restart() {
   hints.innerHTML = wordMsg;
   diagnostic.innerHTML = dMsg;
   result.innerHTML = rMsg;
-
-  console.log(
-    "nextWord should not the same as currentWord: " +
-      currentWord +
-      " != " +
-      nextWord
-  );
 }
 
 function displayResult() {
@@ -215,6 +216,7 @@ function prepareFood() {
 // We then return the transcript property of the SpeechRecognitionAlternative object
 recognition.onresult = function (event) {
   let spokenWord = event.results[0][0].transcript;
+  console.log("spoken word: ", spokenWord)
   if (spokenWord == currentWord) {
     resultMsg = "정답입니다";
     dMsg = "";
@@ -248,9 +250,19 @@ recognition.onerror = function (event) {
   msg = "못알아 들었습니다";
   hints.innerHTML = msg;
 
-  errMsg = `<p style="font-size:8px">` + event.error + "</p>";
+  errMsg = `<p style="font-size:10px">` + event.error + "</p>";
   errorMessage.innerHTML = errMsg;
-  console.log(errMsg);
+  console.log(event.error);
+  console.log("재시작");
+  
+  setTimeout(function () {
+    errMsg = "";
+    errorMessage.innerHTML = errMsg;
+  }, 2000);
+
+  setTimeout(function () {
+    restart();
+  }, 1000);
 };
 
 recognition.onspeechend = function () {
