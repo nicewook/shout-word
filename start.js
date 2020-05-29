@@ -59,7 +59,11 @@ function startFoodWord() {
 recognition.onresult = function (event) {
   let spokenWord = event.results[0][0].transcript;
 
-  if (spokenWord == "동물" || spokenWord == "탈 것" || spokenWord == "먹을 것") {
+  if (
+    spokenWord == "동물" ||
+    spokenWord == "탈 것" ||
+    spokenWord == "먹을 것"
+  ) {
     // start condition
     console.log("시작합니다");
     hintsMsg = "<b>" + spokenWord + "</b>";
@@ -68,13 +72,13 @@ recognition.onresult = function (event) {
     result.innerHTML = resultMsg;
     // displayResult();
 
-    let start = function();
+    let start = function () {};
     if (spokenWord == "동물") {
-      start = startAnimalWord
-    } else  if (spokenWord == "탈 것") {
-      start = startVehicleWord
-    }  else {
-      start = startFoodWord
+      start = startAnimalWord;
+    } else if (spokenWord == "탈 것") {
+      start = startVehicleWord;
+    } else {
+      start = startFoodWord;
     }
 
     setTimeout(function () {
