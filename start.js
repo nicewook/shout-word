@@ -36,8 +36,16 @@ function startGame() {
   recognition.start();
 }
 
-function startProblem() {
-  window.location.href = "./problem.html";
+function startAnimalWord() {
+  window.location.href = "./animal.html";
+}
+
+function startVehicleWord() {
+  window.location.href = "./vehicle.html";
+}
+
+function startFoodWord() {
+  window.location.href = "./food.html";
 }
 
 // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
@@ -51,7 +59,7 @@ function startProblem() {
 recognition.onresult = function (event) {
   let spokenWord = event.results[0][0].transcript;
 
-  if (spokenWord == "동물" || spokenWord == "탈것" || spokenWord == "먹을것") {
+  if (spokenWord == "동물" || spokenWord == "탈 것" || spokenWord == "먹을 것") {
     // start condition
     console.log("시작합니다");
     hintsMsg = "<b>" + spokenWord + "</b>";
@@ -59,6 +67,15 @@ recognition.onresult = function (event) {
     hints.innerHTML = hintsMsg;
     result.innerHTML = resultMsg;
     // displayResult();
+
+    let start = function();
+    if (spokenWord == "동물") {
+      start = startAnimalWord
+    } else  if (spokenWord == "탈 것") {
+      start = startVehicleWord
+    }  else {
+      start = startFoodWord
+    }
 
     setTimeout(function () {
       startProblem();
