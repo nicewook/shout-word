@@ -25,7 +25,7 @@ var animal = [
   "젖소",
   "오리",
 ];
-var car = [
+var vehicle = [
   "경찰차",
   "택시",
   "버스",
@@ -72,17 +72,19 @@ var food = [
 
 var grammarAnimal =
   "#JSGF V1.0; grammar animal; public <animal> = " + animal.join(" | ") + " ;";
-var grammarCar =
-  "#JSGF V1.0; grammar car; public <car> = " + car.join(" | ") + " ;";
+var grammarVehicle =
+  "#JSGF V1.0; grammar vehicle; public <vehicle> = " +
+  vehicle.join(" | ") +
+  " ;";
 var grammarFood =
   "#JSGF V1.0; grammar food; public <food> = " + food.join(" | ") + " ;";
 
 var recognition = new SpeechRecognition();
 var speechRecognitionListAnimal = new SpeechGrammarList();
-var speechRecognitionListCar = new SpeechGrammarList();
+var speechRecognitionListVehicle = new SpeechGrammarList();
 var speechRecognitionListFood = new SpeechGrammarList();
 speechRecognitionListAnimal.addFromString(grammarAnimal, 1);
-speechRecognitionListCar.addFromString(grammarCar, 1);
+speechRecognitionListVehicle.addFromString(grammarVehicle, 1);
 speechRecognitionListFood.addFromString(grammarFood, 1);
 
 recognition.continuous = false;
@@ -100,19 +102,43 @@ var wordMsg = "";
 var dMsg = "";
 var resultMsg = "";
 
-function restart() {
+function animalStart() {
   prepareAnimal();
   recognition.start();
 
   currentWord = animal[Math.floor(Math.random() * animal.length)];
 
-  // if (wordKind == "animal") {
-  //   currentWord = animal[Math.floor(Math.random() * animal.length)];
-  // } else if (wordKind == "car") {
-  //   currentWord = car[Math.floor(Math.random() * car.length)];
-  // } else {
-  //   currentWord = food[Math.floor(Math.random() * food.length)];
-  // }
+  wordMsg = currentWord;
+  dMsg = "";
+  rMsg = "";
+  hints.innerHTML = wordMsg;
+  diagnostic.innerHTML = dMsg;
+  result.innerHTML = rMsg;
+
+  console.log("Ready to receive a animal word.");
+}
+
+function vehicleStart() {
+  prepareVehicle();
+  recognition.start();
+
+  currentWord = vehicle[Math.floor(Math.random() * vehicle.length)];
+
+  wordMsg = currentWord;
+  dMsg = "";
+  rMsg = "";
+  hints.innerHTML = wordMsg;
+  diagnostic.innerHTML = dMsg;
+  result.innerHTML = rMsg;
+
+  console.log("Ready to receive a vehicle word.");
+}
+
+function foodStart() {
+  prepareFoodl();
+  recognition.start();
+
+  currentWord = food[Math.floor(Math.random() * food.length)];
 
   wordMsg = currentWord;
   dMsg = "";
@@ -122,6 +148,33 @@ function restart() {
   result.innerHTML = rMsg;
 
   console.log("Ready to receive a word.");
+}
+function restart() {
+  recognition.start();
+
+  // no same word contagiously
+  while (true) {
+    nextWord = animal[Math.floor(Math.random() * animal.length)];
+    if (nextWord !== currentWord) {
+      break;
+    }
+    console.log("the same c to receive a word.");
+  }
+  currentWord = nextWord;
+
+  wordMsg = currentWord;
+  dMsg = "";
+  rMsg = "";
+  hints.innerHTML = wordMsg;
+  diagnostic.innerHTML = dMsg;
+  result.innerHTML = rMsg;
+
+  console.log(
+    "nextWord should not the same as currentWord: " +
+      currentWord +
+      " != " +
+      nextWord
+  );
 }
 
 function displayResult() {
@@ -135,9 +188,9 @@ function prepareAnimal() {
   recognition.grammars = speechRecognitionListAnimal;
 }
 
-function prepareCar() {
-  wordKind = "car";
-  recognition.grammars = speechRecognitionListCar;
+function prepareVehicle() {
+  wordKind = "vehicle";
+  recognition.grammars = speechRecognitionListVehicle;
 }
 
 function prepareFood() {
