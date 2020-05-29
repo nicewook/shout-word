@@ -189,7 +189,7 @@ function displayResult() {
   diagnostic.innerHTML = dMsg;
 }
 
-let wordKind = "animal";
+var wordKind;
 function prepareAnimal() {
   wordKind = "animal";
   recognition.grammars = speechRecognitionListAnimal;
