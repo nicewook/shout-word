@@ -153,8 +153,15 @@ function restart() {
   recognition.start();
 
   // no same word contagiously
+  var nextWord;
   while (true) {
-    nextWord = animal[Math.floor(Math.random() * animal.length)];
+    if (wordKind === animal) {
+      nextWord = animal[Math.floor(Math.random() * animal.length)];
+    } else if (wordKind === vehicle) {
+      nextWord = vehicle[Math.floor(Math.random() * vehicle.length)];
+    } else {
+      nextWord = food[Math.floor(Math.random() * food.length)];
+    }
     if (nextWord !== currentWord) {
       break;
     }
