@@ -92,7 +92,7 @@ recognition.onresult = function (event) {
     result.innerHTML = resultMsg;
 
     setTimeout(function () {
-      start();
+      startGame();
     }, 1000);
     return;
   }
