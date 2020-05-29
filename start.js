@@ -72,17 +72,17 @@ recognition.onresult = function (event) {
     result.innerHTML = resultMsg;
     // displayResult();
 
-    var start = function () {};
+    var startWordFunc;
     if (spokenWord == "동물") {
-      start = startAnimalWord;
+      startWordFunc = startAnimalWord;
     } else if (spokenWord == "탈 것") {
-      start = startVehicleWord;
+      startWordFunc = startVehicleWord;
     } else {
-      start = startFoodWord;
+      startWordFunc = startFoodWord;
     }
 
     setTimeout(function () {
-      start();
+      startWordFunc();
     }, 1000);
     return;
   } else {
