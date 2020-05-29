@@ -226,8 +226,9 @@ recognition.onresult = function (event) {
 
   count++;
   console.log("Confidence: " + event.results[0][0].confidence);
-  if (count >= 10) {
-    console.log("10문제 완료");
+  var totalCount = 5;
+  if (count >= totalCount) {
+    console.log(totalCount + " 문제 완료");
     setTimeout(function () {
       backToStart();
     }, 2000);
